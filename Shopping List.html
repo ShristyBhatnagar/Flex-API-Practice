@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Shopping List</title>
+    <style>
+        .bigContainer{
+            display: flex;
+            flex-wrap: wrap;
+            
+        }
+       
+        mainDiv{
+            /* display:grid;
+            align-content: center; */
+            width: 250px;
+            height: 200px;
+           
+            
+           
+           
+           
+
+        }
+
+        .boxcards {
+            /* display: flex;
+            flex-wrap: wrap; */
+            justify-content: center;
+            border: 3px solid grey;
+            
+            width: 250px;
+            height: 200px;
+            border-radius: 2px;
+            background-color: whitesmoke;
+            margin: 10px;
+            padding: 50px;
+            box-shadow: 0 0 4px 5px grey;
+            border-radius: 30px;
+            
+        }
+
+        .imgs {
+            width: 100px;
+            height: 100px;
+        }
+
+        .tt {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font: bold;
+        }
+    </style>
+</head>
+
+<body>
+<h1 >Shopping List</h1>
+
+    <script>
+         let container = document.createElement('div');
+                        container.className="bigContainer";
+                        document.body.appendChild(container)
+        function showlist() {
+            
+            fetch("https://fakestoreapi.com/products")
+                .then((resp) => resp.json())
+                .then((data) => {
+
+                    data.map((x, i) => {
+
+                        // console.log(data);
+                       
+                        let mainDiv = document.createElement('div');
+                        mainDiv.className = "mainDiv";
+                        let cards = document.createElement('div');
+                        cards.className = "boxcards";
+                        
+                        mainDiv.appendChild(cards);
+                        container.appendChild(mainDiv);
+
+                        let img = document.createElement('img');
+                        img.className = "imgs";
+                        img.src = `${x.image}`;
+                        cards.appendChild(img);
+
+                        let para = document.createElement('p');
+                        let price = document.createTextNode(`Price-    ${x.price}`);
+                        para.appendChild(price);
+                        cards.appendChild(para);
+
+                        let para2 = document.createElement('p');
+                        let title = document.createTextNode(`Description-   ${x.title}`);
+                        para.className = "tt";
+                        para2.appendChild(title);
+                        cards.appendChild(para2);
+
+                        // let title=document.createTextNode(`${x.title}${x.price}`);
+                        //    cards.appendChild(title);
+                        // //    let price=document.createTextNode(``);
+                        // //    cards.appendChild(price);
+                    })
+
+                })
+        }
+        showlist();
+
+
+
+
+
+    </script>
+</body>
+
+</html>
